@@ -1,14 +1,6 @@
 #!/usr/bin/env bash
-# A bash script that:
-# 	Installs Nginx.
-# 	Configures Nginx to listen on port 80.
-# 	Returns a page containing the string "Hello World!" when
-# 		queried at the root with GET request using curl.
-# 	Configure Nginx server so that /redirect_me is
-# 			redirecting to another page.
-# 	Redirection must be a "301 Moved Permanently".
-# 	Configures Nginx server to have a custom 404 page that contains
-# 				the string "Ceci n'est pas une page".
+# Configure Nginx server
+
 sudo apt-get -y update
 sudo apt-get -y install nginx
 
@@ -16,10 +8,7 @@ sudo ufw allow 'Nginx HTTP'
 
 echo "Hello World!" > /var/www/html/index.nginx-debian.html
 
-URL="https://youtu.be/dQw4w9WgXcQ?si=gOoTgc3trB6Ozv8c"
-sudo sed -i "/server_name _;$/a\ \t\trewrite ^/redirect_me $URL permanent;" /etc/nginx/sites-available/default
+URL="https://www.youtube.com/watch?v=QH2-TGUlwu4"
 
-echo "Ceci n'est pas une page" | sudo tee /var/www/html/error_404.html >/dev/null
-sudo sed -i "/rewrite.*/a\ \t\terror_page 404 /error_404.html;" /etc/nginx/sites-available/default
 
 sudo service nginx restart
