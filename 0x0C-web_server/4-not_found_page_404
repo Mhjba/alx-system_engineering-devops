@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Installs nginx web server
+# Configure Nginx server
 
 sudo apt-get -y update
 sudo apt-get -y install nginx
@@ -7,7 +7,6 @@ sudo apt-get -y install nginx
 sudo ufw allow 'Nginx HTTP'
 
 echo "Hello World!" > /var/www/html/index.nginx-debian.html
-
 echo "server {
     listen 80;
     listen [::]:80 default_server;
@@ -16,5 +15,10 @@ echo "server {
     location /redirect_me {
         return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
     }
-}" > /etc/nginx/sites-available/default
+    error_page 404 /404.html;
+    location = /404.html{
+        root /etc/nginx/html;
+        internal;
+    }
+}" | sudo tee /etc/nginx/sites-available/default >/dev/null
 service nginx restart
