@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Debug an Apache web server
+# curl 0:8080: This is a request to a server at 'localhost' (0) on port 8080
+
+# Restart Apache service
+
+sudo service apache2 start
