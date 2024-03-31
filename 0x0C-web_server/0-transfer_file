@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Transfer a file to server
+# bash script that transfers a file from a client to a server using scp
 if [[ $# -gt 3 ]]
 then
     source_f=$1
