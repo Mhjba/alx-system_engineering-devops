@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Sets nginx for listening to 80 port
+sudo apt-get -y update
+sudo apt-get -y install nginx
+python3 -m http.server 80 --directory /usr/share/nginx/html/ >/dev/null 2>&1 &
