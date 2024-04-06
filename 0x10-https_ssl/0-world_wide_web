@@ -5,9 +5,8 @@ display_info ()
 {
     domain="$1"
     subdomain="$2"
-    record=$(dig "$sub_d.$domain" | awk '/ANSWER SECTION/ { getline; print $4 }')
-	dest=$(dig "$sub_d.$domain" | awk '/ANSWER SECTION/ { getline; print $5 }')
-	echo "The subdomain $sub_d is a $record record and points to $dest"
+    do "$subdomain.$domain" | awk '/ANSWER SECTION:/{getline; printf "The subdomain %s is a %s record and points to %s\n", var, $4, $5}'
+    var="$subdomain"
 }
 
 for subdomain in "www" "lb-01" "web-01" "web-02"
