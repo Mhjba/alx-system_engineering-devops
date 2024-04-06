@@ -1,29 +1,21 @@
 #!/usr/bin/env bash
-# Displays informtation about subdomains.
+# script that audits DNS records for subdomains
 
-# uncomment for debugging purposes.
-#set -x
+function audit {
+	local domain="$1"
+	local subdomain="$2"
 
+	if [ -z "$subdomain" ]; then
+		subdomains=("www" "lb-01" "web-01" "web-02")
+	else
+		subdomains=("$subdomain")
+	fi
 
-# variables & parameters
-subdomains=( "www" "lb-01" "web-01" "web-02" )
-domain="$1"
-sub="$2"
-
-dig_cmd () {
-	# func variables
-	sub="$2"
-	INFO="$(dig "$sub.$domain" | grep -A1 'ANSWER SECTION:' | awk 'NR==2')"
-	IP=$(echo "$INFO" | awk '{print $5}')
-	RECORD=$(echo "$INFO" | awk '{print $4}')
-
-	echo -e "The subdomain $sub is a $RECORD record and points to $IP"
+	for sub_d in "${subdomains[@]}"; do
+		record=$(dig "$sub_d.$domain" | awk '/ANSWER SECTION/ { getline; print $4 }')
+		dest=$(dig "$sub_d.$domain" | awk '/ANSWER SECTION/ { getline; print $5 }')
+		echo "The subdomain $sub_d is a $record record and points to $dest"
+	done
 }
 
-if [ $# -eq 1 ]; then
-	for subs in "${subdomains[@]}"; do
-		dig_cmd "$domain" "$subs"
-	done
-elif [ $# -eq 2 ]; then
-	dig_cmd "$domain" "$sub"
-fi
+audit "$1" "$2"
