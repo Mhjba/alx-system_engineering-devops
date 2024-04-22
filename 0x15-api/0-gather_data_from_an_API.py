@@ -1,14 +1,21 @@
 #!/usr/bin/python3
-"""gather data from an api"""
-from requests import get
-from sys import argv
+"""using JSONPlaceholder REST API to get information about an employees
+TODO list progress with his/her employee ID
+"""
 
 if __name__ == "__main__":
-        url = get("https://jsonplaceholder.typicode.com/")
-            user = requests.get(url + "users/{}".format(argv[1])).json()
-                todos = requests.get(url + "todos", params={"userId": argv[1]}).json()
+        import requests
+            from sys import argv
 
-                    completed = [i.get("title") for i in todos if i.get("completed") is True]
-                        print("Employee {} is done with tasks({}/{}):".format(
-                                    user.get("name"), len(completed), len(todos)))
-                            [print("\t {}".format(c)) for c in completed]
+                uri = f'https://jsonplaceholder.typicode.com/users/{argv[1]}/'
+                    u_data = requests.get(uri).json()
+                        td_data = requests.get(uri + 'todos')
+
+                            td_completed = [td for td in td_data.json() if td.get('completed') is True]
+
+                                dn = len(td_completed)
+                                    td = len(td_data.json())
+
+                                        print(f"Employee {u_data.get('name')} is done with tasks({dn}/{td}):")
+                                            for i in td_data.json():
+                                                        print(f"\t {i.get('title')}")
