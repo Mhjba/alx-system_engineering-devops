@@ -1,9 +1,9 @@
 #!/usr/bin/python3
-''' return top ten posts for a subreddit '''
+"""Module for task 1"""
 
 
 def top_ten(subreddit):
-    ''' function to return top 10 posts '''
+    """ Queries the Reddit API """
     import requests
 
     url = f'https://www.reddit.com/r/{subreddit}/hot.json'
