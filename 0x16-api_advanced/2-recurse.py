@@ -8,13 +8,9 @@ import requests
 def recurse(subreddit, hot_list=[], after=None):
     ''' recursivly return hot articles of subreddit '''
     url = f'https://www.reddit.com/r/{subreddit}/hot.json'
-    headers = {'User-Agent': 'Mozilla/5.0 (by Omar)'}
-    params = {'limit': 1,
-              'after': after
-              }
+    headers = {'User-Agent': 'Mozilla/5.0 '}
 
-    response = requests.get(url, headers=headers, params=params,
-                            allow_redirects=False)
+    response = requests.get(url, headers=headers, allow_redirects=False)
 
     if response.status_code != 200:
         return None
@@ -28,5 +24,5 @@ def recurse(subreddit, hot_list=[], after=None):
             hot_list.append(post['data']['title'])
         if data['after']:
             return recurse(subreddit, hot_list=hot_list, after=data['after'])
-        else:
-            return hot_list
+
+        return hot_list
