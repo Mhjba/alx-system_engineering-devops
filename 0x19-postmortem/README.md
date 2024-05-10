@@ -1,30 +1,18 @@
 Issue Summary:
 
-
-
 Date:
 09/05/2024
-
-
 
 Time:
 The event started at 10:00 AM UTC and ends at 14:22 PM UTC .
 
-
 Impact: 
 The web server experienced intermittent downtime, affecting approximately 30% of users accessing the platform.
-
-
 
 Root Cause: 
 misconfiguration of web server's SSL certificate, causing SSL handshake failures.
 
-
-
-Timeline:
-
-      Time                              
-                             Description
+Timeline:                                              
 10:00 AM (UTC)
 problem detected as users reported difficulty accessing the website.
 10:15 AM
@@ -42,26 +30,17 @@ Reconfigured SSL certificate to resolve handshake failures.
 14:22 PM
 Normal service restored, web server functioning properly.
 
-
-
 Root Cause and Resolution:
 The root cause of the issue was a misconfiguration in the web server's SSL certificate, resulting in intermittent SSL handshake failures. These failures prevented users from establishing secure connections to the server, leading to downtime. The issue was resolved by correcting the SSL certificate configuration to ensure proper handshake procedures.
 
 Corrective and Preventative Measures:
-
 Implement automated SSL certificate monitoring and validation processes.
 Developed automated scans to verify SSL certificate configurations and detect  misconfigurations promptly.
 Enhance documentation and training for system administrators on SSL certificate management best practices.
 Conduct regular audits of SSL certificate configurations to identify and rectify any deviations from standards.
 Creating redundant SSL certificate configurations to reduce the impact of similar issues in the future.
 
-
-
-
-
 Conclusion:
-
-
 By implementing these corrective actions and improving our SSL certificate management practices, we aim to enhance the reliability and security of our web server infrastructure, reducing the likelihood of similar incidents  in the future.
 
 
