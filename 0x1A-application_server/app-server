@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+sudo apt install python3.8-venv
+python3 -m venv test
+pip3 install flask
+pip3 install gunicorn
+pip3 install flask_cors
+git clone https://github.com/Mhjba/AirBnB_clone_v2.git
+git clone https://github.com/Mhjba/AirBnB_clone_v3.git
+git clone https://github.com/Mhjba/AirBnB_clone_v4.git
+pip3 install flasgger
+pip3 install SQLALchemy==1.4.*
