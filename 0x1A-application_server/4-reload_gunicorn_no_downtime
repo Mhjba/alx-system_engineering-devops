@@ -1,13 +1,3 @@
-#!/bin/bash
-
-# Define the PID file location
-PID="/path/to/gunicorn.pid"
-
-# Check if the Gunicorn PID file exists
-if [ -f "$PID" ]; then
-    # Send HUP signal to gracefully reload Gunicorn
-    kill -HUP $(cat "$PID")
-    echo "Gunicorn has been gracefully reloaded."
-else
-    echo "Gunicorn PID file does not exist."
-fi
+#!/usr/bin/env bash
+# Gracefully reloads Gunicorn.
+pgrep gunicorn | xargs kill -HUP
